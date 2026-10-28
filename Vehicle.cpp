@@ -1,17 +1,20 @@
+// Toshiro Gibson 10/11/26 - 10/24/2026  (NOT TESTED) (NOT INTEGRATED)
+
 // Includes specific header.
 #include "Vehicle.h"
 
 // Setter for the Make, Model, and Year that passes through inputted strings.
-void Vehicle::setVehicle(std::string M, std::string Mod, std::string Y) {
+void Vehicle::setVehicle(std::string M, std::string Mod, std::string Y, std::string Colour) {
 	Make = M;
 	Model = Mod;
 	Year = Y;
+	Color = Colour;
 	return;
 }
 
 // Getter for the Make, Model, and Year all at once, for use in derived classes.
 std::string Vehicle::getVehicleMMY() {
-	std::string MMY = Make + " " + Model + " " + Year;
+	std::string MMY = Make + " " + Model + " " + Color + " " + Year;
 	return(MMY);
 }
 
@@ -29,4 +32,8 @@ std::string Vehicle::getVehicleMo() {
 int Vehicle::getVehicleY() {
 	int Y = std::stoi(Year);
 	return(Y);
+}
+
+std::string Vehicle::getVehicleC() {
+	return(Color);
 }

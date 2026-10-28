@@ -1,3 +1,5 @@
+// Toshiro Gibson 10/11/26 - 10/24/2026  (NOT TESTED) (NOT INTEGRATED)
+
 // Header File for Vehicle Base Class.
 #ifndef __VEHICLE_H__
 #define __VEHICLE_H__
@@ -12,14 +14,16 @@ private:
 	std::string Make;
 	std::string Model;
 	std::string Year;
+	std::string Color;
 public:
 	// Setter for the variables, then a function to get Make, Model, and Year, then all three seperately,
 	// then a virtual for the other classes to inheret and override.
-	void setVehicle(std::string M, std::string Mod, std::string Y);
+	void setVehicle(std::string M, std::string Mod, std::string Y, std::string Colour);
 	std::string getVehicleMMY();
 	std::string getVehicleMa();
 	std::string getVehicleMo();
 	int getVehicleY();
+	std::string getVehicleC();
 	virtual std::string getVehicle(void) = 0;
 };
 
