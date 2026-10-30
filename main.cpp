@@ -22,6 +22,8 @@ int main(int argc, char* argv[])
     std::string Line;
     // Clears Database
     Database::~Database();
+    // Sets Database Day to 1
+    Database::Database();
     // Open the output file
     InFile.open("Inventory.txt");
     // Contingency for if file cannot open.
@@ -110,7 +112,10 @@ int main(int argc, char* argv[])
             std::cout << " A = Search by Make" << std::endl;
             std::cout << " O = Search by Model" << std::endl;
             std::cout << " Y = Search by Year" << std::endl;
+            std::cout << " C = Search by Color" << std::endl;
+            std::cout << " P = Search by Propulsion Type" << std::endl;
             std::cout << " I = Display Inventory" << std::endl;
+            std::cout << " M = Make a Reservation" << std::endl;
             std::cout << " R = Print Cars with Reservations" << std::endl;
             std::cout << " N = Print Cars without Reservations" << std::endl;
             std::cout << " Q = Quit / Exit the program" << std::endl;
@@ -125,19 +130,8 @@ int main(int argc, char* argv[])
             std::cout << "\n";
             // Search the database
             // Int to keep track of number of matches
-            int match = 0;
-            for (int i = 0; i < DatabaseSize; i++) {
-                if (Database[i]->getVehicleMa() == DesiredMake) {
-                    // Print out matching entries
-                    std::cout << Database[i]->getVehicle() << "\n";
-                    match++;
-                }
-            }
+			Database::search(DesiredMake, "", "", "", "");
             // If no matches are found, say so.
-            if (match == 0) {
-                std::cout << "No Matching Makes\n";
-            }
-            std::cout << "\n";
             break;
         } // case 'a' or 'A'
         case 'o': case 'O': // Search by Model
@@ -149,19 +143,7 @@ int main(int argc, char* argv[])
             std::cout << "\n";
             // Search the database
             // Int to keep track of number of matches
-            int match = 0;
-            for (int i = 0; i < DatabaseSize; i++) {
-                if (Database[i]->getVehicleMo() == DesiredModel) {
-                    // Print out matching entries
-                    std::cout << Database[i]->getVehicle() << "\n";
-                    match++;
-                }
-            }
-            // If no matches are found, say so.
-            if (match == 0) {
-                std::cout << "No Matching Models\n";
-            }
-            std::cout << "\n";
+			Database::search("", DesiredModel, "", "", "");
             break;
         } // case 'o' or 'O'
         case 'y': case 'Y': // Search by Year
@@ -172,22 +154,67 @@ int main(int argc, char* argv[])
             std::cin >> DesiredYear;
             std::cout << "\n";
             // Search the database
-            // Int to keep track of number of matches
-            int match = 0;
-            for (int i = 0; i < DatabaseSize; i++) {
-                if (Database[i]->getVehicleY() == DesiredYear) {
-                    // Print out matching entries
-                    std::cout << Database[i]->getVehicle() << "\n";
-                    match++;
-                }
-            }
-            // If no matches are found, say so.
-            if (match == 0) {
-                std::cout << "No Matching Years\n";
-            }
-            std::cout << "\n";
+			Database::search("", "", "", "", std::to_string(DesiredYear));
             break;
         } // case 'y' or 'Y'
+
+        case 'c': case 'C': // Search by Color
+        {
+            // Prompt the user for the search criteria
+            std::string DesiredColor;
+            std::cout << "Enter Color > ";
+            std::cin >> DesiredColor;
+            std::cout << "\n";
+            // Search the database
+			Database::search("", "", "", DesiredColor, "");
+            break;
+        } // case 'c' or 'C'
+
+        case 'p': case 'P': // Search by Propulsion Type
+        {
+            // Prompt the user for the search criteria
+            std::string DesiredPropulsionType;
+            std::cout << "Enter Propulsion Type > ";
+            std::cin >> DesiredPropulsionType;
+            std::cout << "\n";
+            // Search the database
+			Database::search("", "", DesiredPropulsionType, "", "");
+            break;
+        } // case 'p' or 'P'
+
+        case 'i': case 'I': // Display Inventory
+        {
+            Database::printInventory();
+            break;
+		} // case 'i' or 'I'
+
+        case 'm': case 'M': // Make a Reservation
+        {
+            int VehicleIndex = 0;
+            std::cout << "Enter Vehicle Index (Check inventory for index) > " << std::endl;
+            std::cin >> VehicleIndex;
+            std::vector<int> Days;
+            std::cout << "Enter up to 3 future days to reserve > " << std::endl;
+            std::cin >> Days;
+            if (Database::reserve(VehicleIndex, Days)) {
+                std::cout << "Reservation successful." << std::endl;
+            } else {
+                std::cout << "Reservation failed." << std::endl;
+            }
+            break;
+		} // case 'm' or 'M'
+
+        case 'r': case 'R': // Print Cars with Reservations
+        {
+            Database::printReserved();
+            break;
+		} // case 'r' or 'R'
+
+        case 'n': case 'N': // Print Cars without Reservations
+        {
+            Database::printAvailable();
+			break;
+
         case 'q': case 'Q': // Exit the program
         {
             ExitRequested = true;
