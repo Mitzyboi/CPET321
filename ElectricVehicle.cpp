@@ -1,9 +1,8 @@
 // Includes specific header.
 #include "ElectricVehicle.h"
 
-// Get Vehicle override, which uses Get Vehicle MMY to get the make, model, and year, then adds the specific variables,
-// Fuel Capacity and Efficiency, then returns this as a big string.
+// Get Vehicle override, which uses Get Vehicle MMCY to get the make, model, color, and year, then adds propulsion type.
 std::string ElectricVehicle::getVehicle() {
-	std::string reqVehicle = "Electric Vehicle - " + getVehicleMMY();
+	std::string reqVehicle = "Electric Vehicle - " + getVehicleMMCY();
 	return(reqVehicle);
 }

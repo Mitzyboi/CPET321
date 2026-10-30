@@ -18,8 +18,8 @@ private:
 public:
 	// Setter for the variables, then a function to get Make, Model, and Year, then all three seperately,
 	// then a virtual for the other classes to inheret and override.
-	void setVehicle(std::string M, std::string Mod, std::string Y, std::string Colour);
-	std::string getVehicleMMY();
+	void setVehicle(std::string M, std::string Mod, std::string Colour, std::string Y);
+	std::string getVehicleMMCY();
 	std::string getVehicleMa();
 	std::string getVehicleMo();
 	int getVehicleY();

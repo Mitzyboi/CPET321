@@ -7,7 +7,7 @@
 class ElectricVehicle: public Vehicle {
 // Private variables are Fuel Capacity and Vehicle Efficiency, specifically for it being an electric vehicle.
 public:
-	// Two functions, one is an override one is a setter for the two variables.
+	// One function, an override.
 	std::string getVehicle() override;
 };
 

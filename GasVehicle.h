@@ -6,7 +6,7 @@
 // New Class Gas Vehicle which uses Vehicle Class.
 class GasVehicle: public Vehicle {
 public:
-	// Two functions, one is an override one is a setter for the two variables.
+	// One function, an override.
 	std::string getVehicle() override;
 };
 
